@@ -2,6 +2,9 @@ const express = require("express");
 const app = express();
 const port = 3000;
 const mongoose = require("mongoose");
+app.use(express.urlencoded({ extended: true }));
+
+
 
 app.get("/", (req, res) => {
   res.sendFile("./views/index.html", { root: __dirname });
