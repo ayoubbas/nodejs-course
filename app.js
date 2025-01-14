@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 const Mydata = require("./models/mydataSchema");
 
 app.get("/", (req, res) => {
-  res.sendFile("./views/index.html", { root: __dirname });
+  res.render("index" , {myTitle: "home page"});
 });
 
 app.listen(port, () => {
