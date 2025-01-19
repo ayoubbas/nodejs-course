@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 
+
 // const path = require("path");
 // app.use(express.static(path.join(__dirname, "views")));
 
@@ -13,14 +14,13 @@ const Mydata = require("./models/mydataSchema");
 app.get("/", (req, res) => {
   Mydata.find()
     .then((result) => {
-      result.map((obj) => {
-        console.log(obj.userNameee);
-      });
+      // console.log(result);
+
+      res.render("index", { myTitle: "home page", arr: result });
     })
     .catch((err) => {
       console.log(err);
     });
-  res.render("index", { myTitle: "home page" });
 });
 
 app.get("/success", (req, res) => {
