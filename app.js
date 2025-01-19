@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 
-
+app.use(express.static("public"));
 // const path = require("path");
 // app.use(express.static(path.join(__dirname, "views")));
 
@@ -52,6 +52,20 @@ app.post("/", (req, res) => {
     .catch((err) => {
       console.log(err);
     });
+});
+
+const path = require("path");
+const livereload = require("livereload");
+const liveReloadServer = livereload.createServer();
+liveReloadServer.watch(path.join(__dirname, "public"));
+
+const connectLivereload = require("connect-livereload");
+app.use(connectLivereload());
+
+liveReloadServer.server.once("connection", () => {
+  setTimeout(() => {
+    liveReloadServer.refresh("/");
+  }, 100);
 });
 // const express = require("express");
 // const app = express();
